@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.border.Border;
 import javax.swing.BorderFactory;
 import javax.swing.border.EtchedBorder;
+import java.awt.Point;
 
 public class EditCustomer extends JDialog
 {
@@ -413,7 +414,8 @@ public class EditCustomer extends JDialog
 		add(panel,BorderLayout.CENTER);
 		add(buttonPanel,BorderLayout.PAGE_END);
 		
-		setLocationRelativeTo(parent.getWindow());
+// 		setLocationRelativeTo(parent.getWindow());
+          setLocation(new Point(parent.getWindow().getX()+40, parent.getWindow().getY()+50));
 		setTitle("Edit Customer");
 
 		pack();

@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='ISO-8859-1'  ?>
+<!DOCTYPE toc
+  PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp TOC Version 1.0//EN"
+         "http://java.sun.com/products/javahelp/toc_1_0.dtd">
+
+<toc version="1.0">
+     <tocitem text="Trashbiller Contents" image="toplevelfolder" target="beginning">
+     <tocitem text="Overview" target="overview"/>
+     <tocitem text="Add Customer" target="add_customer"/>
+     <tocitem text="Search" target="search"/>
+     <tocitem text="Edit" target="edit"/>
+     <tocitem text="Payments" target="payment"/>
+     <tocitem text="Reports" target="reports">
+          <tocitem text="Payment History" target="all_payment"/>
+          <tocitem text="Who has paid" target="paid"/>
+          <tocitem text="Who has not paid" target="not_paid"/>
+     </tocitem>
+     <tocitem text="License" target="license"/>
+</toc>

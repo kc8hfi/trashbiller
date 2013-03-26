@@ -26,6 +26,8 @@ import java.awt.Toolkit;
 import java.awt.Dimension;
 import java.net.URL;
 
+import javax.help.*;
+
 public class MainWindow extends JFrame 
 {
 	MainWindow() throws ClassNotFoundException//,IOException
@@ -55,7 +57,7 @@ public class MainWindow extends JFrame
 // 		width = width/2;
 		
 // 		height = height/2;
-// 		System.out.println("width: " + width + " height: " + height);
+		System.out.println("width: " + width + " height: " + height);
 		
 		//set up the interface
 // 		setSize(510,500); 
@@ -164,34 +166,68 @@ public class MainWindow extends JFrame
 		
 		AboutAction aboutAction = new AboutAction(this,"About","about",
 								"About trash biller",
-								createIcon("/about.png","about"),
+								null,
 								KeyStroke.getKeyStroke(KeyEvent.VK_B,ActionEvent.CTRL_MASK));
 		
 		JMenuItem about = new JMenuItem(aboutAction);
 		about.setMnemonic(KeyEvent.VK_B);
-		helpMenu.add(about);
 		
-		menu.add(helpMenu);
+
+          
+//@here        
+          ClassLoader classLoader = getClass().getClassLoader();
+          URL helpUrl = getClass().getResource("/resources/help/trashbiller.hs");
+          try
+          {
+               helpSet = new HelpSet(classLoader,helpUrl);
+               helpBroker = helpSet.createHelpBroker("Main Window");
+          }
+          catch(HelpSetException hse)
+          {
+               System.out.println(hse);
+          }
+          
+
+          
+          JMenuItem help = new JMenuItem("Contents");
+          ImageIcon helpIcon = createIcon("/help.png","Help");
+          help.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1,0));
+          help.setIcon(helpIcon);
+          help.setToolTipText("Help Contents");
+          helpBroker.enableHelpOnButton(help,"overview",helpSet);
+          
+          
+          helpMenu.add(help);
+          helpMenu.addSeparator();
+          helpMenu.add(about);
+
+          menu.add(helpMenu);
+          
+          
+          
+          
+          
+          
+          setJMenuBar(menu);
+          //add a toolbar
+          JToolBar toolbar = new JToolBar("Tool Bar",JToolBar.HORIZONTAL);
+          JButton payButton = new JButton(payBillHandler);
+          payButton.setText("");
+          JButton searchButton = new JButton(searchHandler);
+          searchButton.setText("");
+          JButton addButton = new JButton(addHandler);
+          addButton.setText("");
+          toolbar.add(payButton);
+          toolbar.addSeparator();
+          toolbar.add(searchButton);
+          toolbar.addSeparator();
+          toolbar.add(addButton);
 		
-		setJMenuBar(menu);
-		//add a toolbar
-		JToolBar toolbar = new JToolBar("Tool Bar",JToolBar.HORIZONTAL);
-		JButton payButton = new JButton(payBillHandler);
-		payButton.setText("");
-		JButton searchButton = new JButton(searchHandler);
-		searchButton.setText("");
-		JButton addButton = new JButton(addHandler);
-		addButton.setText("");
-		toolbar.add(payButton);
+		JButton helpButton = new JButton(helpIcon);
+          helpButton.setToolTipText("Help Contents");
+// 		aboutButton.setText("");
 		toolbar.addSeparator();
-		toolbar.add(searchButton);
-		toolbar.addSeparator();
-		toolbar.add(addButton);
-		
-		JButton aboutButton = new JButton(aboutAction);
-		aboutButton.setText("");
-		toolbar.addSeparator();
-		toolbar.add(aboutButton);
+		toolbar.add(helpButton);
 		
 		add(toolbar,BorderLayout.PAGE_START);
 		
@@ -385,4 +421,8 @@ public class MainWindow extends JFrame
 	private JPanel cards;
 	private CardLayout cardLayout;
 	private Initialize setup;
+
+	private HelpSet helpSet;
+	private HelpBroker helpBroker;
+	
 }
