@@ -56,8 +56,9 @@
 	
 	<!-- build the jar file -->
 	<target name="jar" depends="build" description="build jar file" >
-		<jar jarfile="${dist}/${ant.project.name}.jar" basedir="${build}" >
-
+          <!-- renamed the jar file -->
+          <!--<jar jarfile="${dist}/${ant.project.name}.jar" basedir="${build}" >-->
+          <jar jarfile="${dist}/smalley_sanitation.jar" basedir="${build}" >
 			<manifest>
 				<attribute name="Main-Class" value="${main_class}" />
 				<attribute name="Class-Path" value="${manifest_classpath}" />
@@ -67,7 +68,9 @@
 	
 	<!-- run the jar file -->
 	<target name="run" depends="build,jar" description="run the jar file" >
-		<java jar="${dist}/${ant.project.name}.jar" fork="true">
+          <!-- changed the name of the jar file to run -->
+          <!--<java jar="${dist}/${ant.project.name}.jar" fork="true"> -->
+          <java jar="${dist}/smalley_sanitation.jar" fork="true">
 		</java>
 	</target>
 	

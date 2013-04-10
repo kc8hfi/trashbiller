@@ -86,7 +86,7 @@ public class MainWindow extends JFrame
 		setLocation(width/2,height/2);
 // 		setLocationRelativeTo(null);
 
-		setTitle("Trash biller"); 
+		setTitle("Smalley Sanitation"); 
 		
 		//setLayout(new GridLayout(0,1));	//rows,cols
 		setLayout(new BorderLayout());
@@ -161,6 +161,14 @@ public class MainWindow extends JFrame
 		
 		JMenu reportsMenu = new JMenu("Reports");
 		reportsMenu.setMnemonic(KeyEvent.VK_R);
+          
+          
+          ExportCustomerAction exportCustomerAction = new ExportCustomerAction(this,"Export Customers","export_customer",
+                                                                               "Export a list of all the current customers");
+          JMenuItem exportCustomer = new JMenuItem(exportCustomerAction);
+          
+          reportsMenu.add(exportCustomer);
+          reportsMenu.addSeparator();
 		
 		JMenuItem allPaymentHistory = new JMenuItem("All Payment History");
 		allPaymentHistory.setActionCommand("all_payments");
