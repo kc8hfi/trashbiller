@@ -85,7 +85,8 @@ public class SaveToDisk
                     Csv combine = new Csv();
                     for(int i=0;i<data.size();i++)
                     {
-                         String s = combine.combine(data.at(i));
+                         String s = combine.combine(data.get(i));
+					System.out.println("write this: " + s);
                          out.println(s);
                     }
                     out.close();
