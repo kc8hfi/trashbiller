@@ -154,9 +154,22 @@ public class PaidOrNot extends JDialog
 		
 // 		scrollPane.setRowHeaderView(RowTable);
 // 		scrollPane.setCorner(JScrollPane.UPPER_LEFT_CORNER,RowTable.getTableHeader());
+          export = new JButton("Export");
+          export.setEnabled(false);
+          export.setActionCommand("export");
+          export.addActionListener(r);
+          JPanel exportPanel = new JPanel();
+          exportPanel.setLayout(new BoxLayout(exportPanel,BoxLayout.PAGE_AXIS));
+          exportPanel.setBorder(el);
+          
+          JPanel exportButtonPanel = new JPanel();
+          exportButtonPanel.add(export);
+          exportPanel.add(exportButtonPanel);
+          
    		
 		add(topPanel,BorderLayout.PAGE_START);
 		add(scrollPane,BorderLayout.CENTER);
+          add(exportPanel,BorderLayout.PAGE_END);
 		
 		if (t.equals("paid"))
 			setTitle("Who has paid");
@@ -189,9 +202,15 @@ public class PaidOrNot extends JDialog
 	{
 		return (String)month.getSelectedItem();
 	}
+     public void enableExport(boolean t)
+     {
+          export.setEnabled(t);
+     }
+	
 	private MainWindow parent;
 	private JTable payments;
 	private ArrayList<String>months;
 	private JComboBox<String> year;
 	private JComboBox<String> month;
+     private JButton export;
 }
