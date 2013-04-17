@@ -53,7 +53,7 @@ class AllPaymentsAction implements ActionListener
 	}
 	public void actionPerformed(ActionEvent evt)
 	{
-          System.out.println("do this: " + evt.getActionCommand());
+//           System.out.println("do this: " + evt.getActionCommand());
 		if (evt.getActionCommand().equals("export"))
 		{
 			export();
@@ -96,8 +96,8 @@ class AllPaymentsAction implements ActionListener
           String paymentq = "select payment_date from payments where payment_id = ? "+
           "and strftime('%Y-%m',payment_date) = ? ";
 
-          System.out.println("allpayments query:" + query);
-          System.out.println("allpayments paymentq: " + paymentq);
+//           System.out.println("allpayments query:" + query);
+//           System.out.println("allpayments paymentq: " + paymentq);
           
           try
           {

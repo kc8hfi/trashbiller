@@ -29,7 +29,7 @@ public class ReportsHandler implements ActionListener
 	}
 	public void actionPerformed(ActionEvent evt)
 	{
-		System.out.println("which one to open: " + evt.getActionCommand());
+// 		System.out.println("which one to open: " + evt.getActionCommand());
 		if (evt.getActionCommand().equals("all_payments"))
 		{
 			AllPayments everything = new AllPayments(parent);

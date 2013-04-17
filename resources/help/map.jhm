@@ -12,6 +12,7 @@
      <mapID target="edit" url="edit.html" />
      <mapID target="payment" url="payment.html" />
      <mapID target="reports" url="reports.html" />
+     <mapID target="export_customers" url="reports.html#export_customers" />
      <mapID target="all_payment" url="reports.html#all_payment" />
      <mapID target="paid" url="reports.html#paid" />
      <mapID target="not_paid" url="reports.html#not_paid" />

@@ -49,8 +49,8 @@ class PaidOrNotAction implements ActionListener
 	}
 	public void actionPerformed(ActionEvent evt)
 	{
-		System.out.println("do this: " + evt.getActionCommand());
-		System.out.println("which one: " + whichOne);
+// 		System.out.println("do this: " + evt.getActionCommand());
+// 		System.out.println("which one: " + whichOne);
 		if (evt.getActionCommand().equals("export"))
           {
                export();
@@ -130,8 +130,8 @@ class PaidOrNotAction implements ActionListener
           
           String query = select + where + order;
           
-          System.out.println("query: " + query);
-          System.out.println("date: " + date);
+//           System.out.println("query: " + query);
+//           System.out.println("date: " + date);
           
           try
           {
@@ -158,7 +158,7 @@ class PaidOrNotAction implements ActionListener
                          ArrayList<String>people = new ArrayList<String>(0);
                          for(int i=1;i<=colCount;i++)
                          {
-                              System.out.println(rs.getObject(i));
+//                               System.out.println(rs.getObject(i));
                               people.add(rs.getString(i));
                          }
                          everything.add(people);
@@ -168,7 +168,7 @@ class PaidOrNotAction implements ActionListener
                     parent.getTable().setModel(tableModel);
                     
                     //enable the button only if there is data
-                    System.out.println("size: " + everything.size());
+//                     System.out.println("size: " + everything.size());
                     if (everything.size()> 0)
                          parent.enableExport(true);
                }

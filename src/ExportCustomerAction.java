@@ -85,8 +85,8 @@ public class ExportCustomerAction extends AbstractAction
                          //add the little array to the big array
                          theData.add(temp);
                     }
-                    System.out.println("size: " + theData.size());
-                    System.out.println("now we need to show the file dialog, pass in the theData");
+//                     System.out.println("size: " + theData.size());
+//                     System.out.println("now we need to show the file dialog, pass in the theData");
                     SaveToDisk saveme = new SaveToDisk(window,theData);
                }
           }

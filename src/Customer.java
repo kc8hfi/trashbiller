@@ -22,6 +22,13 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import java.util.ArrayList;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 
 public class Customer
 {
@@ -318,7 +325,85 @@ public class Customer
 			"begin: " + begin + "\n" + 
 			"end: "+ end;
 		return t;
-	}
+	}    
+
+	public ArrayList< ArrayList<String> > getPayments(Connection con)
+     {
+          ArrayList< ArrayList<String> > d = new ArrayList<ArrayList<String> >(0);
+          //get all their years
+          String query = "select distinct(strftime('%Y',payment_date)) tyear " +
+               "from payments "+
+               "where payment_id  =  ?" +
+               "order by tyear desc "
+               ;
+//           System.out.println("query: " + query);
+          try
+          {
+               PreparedStatement stmt = null;
+//                Connection con = w.getConnection();
+               if (con != null)
+               {
+                    stmt = con.prepareStatement(query);
+                    stmt.setInt(1,getId());
+                    ResultSet rs = stmt.executeQuery();
+                    ArrayList<String> years = new ArrayList<String>(0);
+                    while(rs.next())
+                    {
+                         //gather up all the years
+                         years.add(rs.getString(1));
+                    }
+//                     System.out.println("how many years: " + years.size());
+                    //loop through each year and match that up to each month
+                    String[] m = {"01","02","03","04","05","06","07","08","09","10","11","12"};
+                    for (String y: years)
+                    {
+                         ArrayList<String> eachrow = new ArrayList<String>(0);
+                         eachrow.add(y);
+                         for(int i=0;i<m.length;i++)
+                         {
+                              String q = "select payment_date " +
+                                   "from payments " + 
+                                   "where payment_id = ? " +
+                                   "and strftime('%Y',payment_date) = ? " +
+                                   "and strftime('%m',payment_date) = ? " 
+                              ;
+                              stmt = con.prepareStatement(q);
+                              stmt.setInt(1,getId());
+                              stmt.setString(2,y);
+                              stmt.setString(3,m[i]);
+                              rs = stmt.executeQuery();
+                              if (rs.next())
+                                   eachrow.add("X");
+                              else
+                                   eachrow.add(" ");
+                         }//end loop of months
+                         //add eachrow to the big array
+                         d.add(eachrow);
+                    }//end loop of years
+               }
+               else
+               {
+                    //connection is null
+//                     JOptionPane.showMessageDialog(parent.getParent(),
+//                          "Please check your configuration settings!",
+//                          "No Database Connection!",
+//                          JOptionPane.ERROR_MESSAGE
+//                     );
+               }
+          }
+          catch(SQLException exception)
+          {
+//                JOptionPane.showMessageDialog(parent.getParent(),
+//                     "query:\n" + query +"\n"+exception,
+//                     "reportpaidaction actionPerformed",
+//                     JOptionPane.ERROR_MESSAGE
+//                );
+               System.out.println(exception);
+          }          
+          
+          return d;
+     }//end getPayments
+	
 	
 	private int id;
 	private int accountNo;

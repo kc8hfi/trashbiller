@@ -38,7 +38,7 @@ public class AboutAction extends AbstractAction
 	}
 	public void actionPerformed(ActionEvent e)
 	{
-		System.out.println("show the about dialog box, " + e.getActionCommand());
+// 		System.out.println("show the about dialog box, " + e.getActionCommand());
 		
 		About about = new About(parentWindow);
 		about.setModal(true);

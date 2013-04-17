@@ -32,13 +32,17 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ButtonGroup;
 import javax.swing.BoxLayout;
-import javax.swing.JRadioButton;
-import javax.swing.JComboBox;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.Border;
 import javax.swing.BorderFactory;
 import javax.swing.border.EtchedBorder;
 import java.awt.Point;
+import java.awt.Dimension;
+
 
 public class EditCustomer extends JDialog
 {
@@ -291,7 +295,24 @@ public class EditCustomer extends JDialog
 		endPanelLayout.setHorizontalGroup(endhGroup);
 		endPanelLayout.setVerticalGroup(endvGroup);
 		
-		
+          CustomerHistoryModel history = new CustomerHistoryModel();
+          table = new JTable(history);
+          
+          ArrayList<String> t = new ArrayList<String>(0);
+          t.add("Year");
+          for(int i=1;i<months.length;i++)
+          {
+               t.add(months[i]);
+          }
+          history.setColNames(t);
+          history.setData(c.getPayments(parent.getWindow().getConnection()));
+//           ArrayList< ArrayList<String> > pd = c.getPayments();
+          
+          
+          JScrollPane scrollPane = new JScrollPane(table);
+          scrollPane.setBorder(compound);
+          scrollPane.setPreferredSize(new Dimension(650,100));  //width, height
+          
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(compound);
@@ -322,7 +343,6 @@ public class EditCustomer extends JDialog
 		// the second label and text field. By using a sequential group
 		// the labels and text fields are positioned vertically after one another.
 
-		
 		//the first horizontal group will contain a parallel group with the labels
 		hGroup.addGroup(layout.createParallelGroup().
 					addComponent(acctNoLabel)
@@ -335,6 +355,7 @@ public class EditCustomer extends JDialog
 					.addComponent(typeLabel)
 					.addComponent(beginLabel)
 					.addComponent(endLabel)
+//                          .addComponent(scrollPane)
 		);
 		//the next horizontal group contains a parallel group with the textfields
 		hGroup.addGroup(layout.createParallelGroup().
@@ -400,7 +421,9 @@ public class EditCustomer extends JDialog
 					addComponent(endLabel)
 					.addComponent(endPanel)
 		);
-
+//           vGroup.addGroup(layout.createParallelGroup(Alignment.BASELINE).
+//                          addComponent(scrollPane)
+//           );
 		
 		
 		layout.setHorizontalGroup(hGroup);
@@ -429,8 +452,12 @@ public class EditCustomer extends JDialog
 		instrPanel.setBorder(compound);
 		instrPanel.add(new JLabel("instructions"));
 		
-		add(instrPanel,BorderLayout.PAGE_START);
-		add(panel,BorderLayout.CENTER);
+// 		add(instrPanel,BorderLayout.PAGE_START);
+// 		add(panel,BorderLayout.CENTER);
+          
+          
+          add(panel,BorderLayout.PAGE_START);
+          add(scrollPane,BorderLayout.CENTER);
 		add(buttonPanel,BorderLayout.PAGE_END);
 		
 // 		setLocationRelativeTo(parent.getWindow());
@@ -478,7 +505,7 @@ public class EditCustomer extends JDialog
 	{
 		return parent.getWindow();
 	}
-	
+
 	private ArrayList<JTextField> textFields;
 	private ButtonGroup bgroup;
 	private JComboBox<String> beginMonth;
@@ -488,6 +515,8 @@ public class EditCustomer extends JDialog
 	private JComboBox<String> endMonth;
 	private JComboBox<String> endDay;
 	private JComboBox<String> endYear;
+     
+     private JTable table;
 	
 	private Search parent;
 }

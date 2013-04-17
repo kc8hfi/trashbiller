@@ -4,13 +4,14 @@
          "http://java.sun.com/products/javahelp/toc_1_0.dtd">
 
 <toc version="1.0">
-     <tocitem text="Trashbiller Contents" image="toplevelfolder" target="beginning">
+     <tocitem text="Smalley Sanitation Contents" image="toplevelfolder" target="beginning">
      <tocitem text="Overview" target="overview"/>
      <tocitem text="Add Customer" target="add_customer"/>
      <tocitem text="Search" target="search"/>
      <tocitem text="Edit" target="edit"/>
      <tocitem text="Payments" target="payment"/>
      <tocitem text="Reports" target="reports">
+          <tocitem text="Export Customers" target="export_customers"/>
           <tocitem text="Payment History" target="all_payment"/>
           <tocitem text="Who has paid" target="paid"/>
           <tocitem text="Who has not paid" target="not_paid"/>

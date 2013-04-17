@@ -17,16 +17,12 @@
  * along with Trashbiller.  If not, see<http://www.gnu.org/licenses/>.
 */
 
-// import javax.swing.AbstractAction;
-// import javax.swing.ImageIcon;
-// import javax.swing.KeyStroke;
-// import java.awt.event.ActionEvent;
 import javax.swing.JFileChooser;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.PrintWriter;
-
+import javax.swing.JOptionPane;
 import java.util.ArrayList;
 
 public class SaveToDisk
@@ -46,36 +42,69 @@ public class SaveToDisk
      
      protected void save()
      {
-          System.out.println("show the file picker");
+//           System.out.println("show the file picker");
           JFileChooser filePicker = new JFileChooser();
           
 //           filePicker.setFileHidingEnabled(false);
 //           filePicker.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-          
-          int returnValue = filePicker.showSaveDialog(parent);
-          if (returnValue == filePicker.APPROVE_OPTION)
+          boolean exportData = false;
+          File f = null;
+          do
           {
-               File f = filePicker.getSelectedFile();
-               String split[] = f.getName().split("\\.");
-               String newname = "";
-               if (split.length == 1)
+               int returnValue = filePicker.showSaveDialog(parent);
+               if (returnValue == filePicker.APPROVE_OPTION)
                {
-//                     System.out.println("no extension, so put one");
-                    newname = split[0] + ".csv";
+                    f = filePicker.getSelectedFile();
+                    String split[] = f.getName().split("\\.");
+                    String newname = "";
+                    if (split.length == 1)
+                    {
+     //                     System.out.println("no extension, so put one");
+                         newname = split[0] + ".csv";
+                    }
+                    else if(!split[1].equals("csv") )
+                    {
+     //                     System.out.println("not csv, so put it");
+                         newname = split[0] + ".csv";
+                    }
+                    else
+                         newname = f.getName();
+                    
+                    newname = f.getParentFile() + System.getProperty("file.separator") + newname;
+                    System.out.println("new name: " + newname);
+                    //make a new file
+                    
+                    f = new File(newname);
+                    if (f.exists())
+                    {
+//                          System.out.println("the file exists, ask them if they want to overwrite it");
+                         int overwrite = JOptionPane.showConfirmDialog(null,"The file exists, overwrite?","File Exists",
+                                                                       JOptionPane.YES_NO_OPTION);
+                         System.out.println("overwrite: " + overwrite);
+                         if(overwrite == 0)//overwrite the file, 0 = yes, 1 = no
+                         {
+                              exportData = true;
+                         }
+                         else //don't overwrite the file
+                         {
+                              exportData = false;
+                         }
+                    }
+                    else
+                    {
+                         exportData = true;
+                    }
                }
-               else if(!split[1].equals("csv") )
-               {
-//                     System.out.println("not csv, so put it");
-                    newname = split[0] + ".csv";
-               }
+               //don't save the file at all
                else
-                    newname = f.getName();
-               
-               newname = f.getParentFile() + System.getProperty("file.separator") + newname;
-               System.out.println("new name: " + newname);
-               //make a new file
-               
-               f = new File(newname);
+               {
+                    break;
+               }
+          }
+          while(exportData == false);
+          
+          if (exportData)
+          {
                try 
                {
                     FileWriter writer = new FileWriter(f);
@@ -86,67 +115,25 @@ public class SaveToDisk
                     for(int i=0;i<data.size();i++)
                     {
                          String s = combine.combine(data.get(i));
-					System.out.println("write this: " + s);
+//                          System.out.println("write this: " + s);
                          out.println(s);
                     }
                     out.close();
                     bufferedWriter.close();
                     writer.close();
-                    
-                    //out.println("some string");
-//                     traverse();
-//                     out.close();
-//                     bufferedWriter.close();
-//                     writer.close();
-//                     System.out.println("everything is closed");
-//                     System.out.println("already set the title " + theFile);
-//                     myTreeClass.getParentWindow().setTitle("Scratchpad - " + theFile);
-                    
                }
                catch (Exception fe)
                {
+                    System.out.println("something happened, " + fe);
+                    JOptionPane.showMessageDialog(parent,
+                         "Can't write to\n" + fe,
+                         "Export data error!",
+                         JOptionPane.ERROR_MESSAGE
+                    );
                }
+          }//end write the file
+     }//end save
 
-          }
-
-//           if (myTreeClass.getFileSaved() == 0)     //the file is not saved
-//           {
-//                if (myTreeClass.getFileName() == "")
-//                {
-//                     System.out.print("show the file chooser dialog to get a file first");
-//                     JFileChooser filePicker = new JFileChooser();
-//                     int returnValue = filePicker.showSaveDialog(myTreeClass.getParentWindow());
-//                     if (returnValue == filePicker.APPROVE_OPTION)
-//                     {
-//                          System.out.println("they clicked ok");
-//                          File f = filePicker.getSelectedFile();
-//                          System.out.println(f.getName());
-//                          
-//                          //create a new SaveToDisk object
-//                          SaveToDisk saveme = new SaveToDisk(myTreeClass,f);
-//                          saveme.write();
-//                          myTreeClass.setFileName(f.getPath());
-//                          myTreeClass.setFileSaved(1);
-//                          //saveAction.setEnabled(false);
-//                          setEnabled(false);
-//                     }//they clicked ok
-//                }
-//                else
-//                {
-//                     System.out.println(myTreeClass.getFileName());
-//                     //create a new SaveToDisk object
-//                     File f = new File(myTreeClass.getFileName());
-//                     SaveToDisk saveme = new SaveToDisk(myTreeClass,f);
-//                     saveme.write();
-// 
-//                     myTreeClass.setFileSaved(1);
-//                     //saveAction.setEnabled(false);
-//                     setEnabled(false);
-//                }
-//           }//end file was not saved
-     }//end actionPerformed
-     
-//      private tree myTreeClass;
      private ArrayList<ArrayList<String>> data;
      private MainWindow parent;
 }//end SaveAction
