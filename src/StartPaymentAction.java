@@ -132,7 +132,7 @@ public class StartPaymentAction extends AbstractAction
                     MyTable tb = parent.getTable();
                     
                     //this might be a bad idea to hard code the row height
-                    tb.setRowHeight(25);
+//                     tb.setRowHeight(25);
                     
 
                     MyTablePayModel m = (MyTablePayModel)tb.getModel();

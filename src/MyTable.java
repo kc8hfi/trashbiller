@@ -29,6 +29,7 @@ public class MyTable extends JTable
      public MyTable(MyTablePayModel m)
      {
           super(m);
+          setRowHeight(25);
      }
      // [snip]
 
