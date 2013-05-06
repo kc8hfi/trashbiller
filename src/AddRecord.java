@@ -111,6 +111,7 @@ public class AddRecord extends JPanel
 		Border compound = BorderFactory.createCompoundBorder(paneEdge,lowered);
 
 		JLabel acctNoLabel = new JLabel("Account No.");
+          JLabel stickerNoLabel = new JLabel("Sticker No.");
 		JLabel fnameLabel = new JLabel("First Name");
 		JLabel lnameLabel = new JLabel("Last Name");
 		JLabel addressLabel = new JLabel("Address");
@@ -122,6 +123,7 @@ public class AddRecord extends JPanel
 		JLabel endLabel = new JLabel("End Date");
 		
 		JTextField acctNoField = new JTextField();
+          JTextField stickerNoField = new JTextField();
 		JTextField fnameField = new JTextField();
 		JTextField lnameField = new JTextField();
 		JTextField addressField = new JTextField();
@@ -130,6 +132,7 @@ public class AddRecord extends JPanel
 		JTextField zipField = new JTextField();
 		
 		textFields.add(acctNoField);
+          textFields.add(stickerNoField);
 		textFields.add(fnameField);
 		textFields.add(lnameField);
 		textFields.add(addressField);
@@ -207,6 +210,7 @@ public class AddRecord extends JPanel
 		//the first horizontal group will contain a parallel group with the labels
 		hGroup.addGroup(layout.createParallelGroup().
 					addComponent(acctNoLabel)
+                         .addComponent(stickerNoLabel)
 					.addComponent(fnameLabel)
 					.addComponent(lnameLabel)
 					.addComponent(addressLabel)
@@ -220,6 +224,7 @@ public class AddRecord extends JPanel
 		//the next horizontal group contains a parallel group with the textfields
 		hGroup.addGroup(layout.createParallelGroup().
 					addComponent(acctNoField)
+                         .addComponent(stickerNoField)
 					.addComponent(fnameField)
 					.addComponent(lnameField)
 					.addComponent(addressField)
@@ -238,6 +243,11 @@ public class AddRecord extends JPanel
 					.addComponent(acctNoField)
 					
 		);
+          vGroup.addGroup(layout.createParallelGroup(Alignment.BASELINE).
+                         addComponent(stickerNoLabel)
+                         .addComponent(stickerNoField)
+                         
+          );
 		//next vertical group
 		vGroup.addGroup(layout.createParallelGroup(Alignment.BASELINE).
 					addComponent(fnameLabel)

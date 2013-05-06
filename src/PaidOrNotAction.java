@@ -117,21 +117,27 @@ class PaidOrNotAction implements ActionListener
           }
           if(whichOne.equals("not_paid"))
           {
-               select += "from accounts "+
+               select += "from accounts " +
                "left join payments "+
-               "on id=payment_id "+
-               //"and strftime('%Y-%m',payment_date) = ? "+
-               "where payment_date is null "+
-               "or strftime('%Y-%m',payment_date) != ? " + 
-               "and date_end = '' ";
+               "on id=payments.payment_id "+
+               "and strftime('%Y-%m', payments.payment_date) = ? "+
+
+               "left join payments test " +
+               "on id =test.payment_id " +
+               " and test.payment_date is null " +
+
+               "where " +
+               "date_end = '' " +
+               "and payments.payment_date is null " ;
           }
           String where = "";
           String order = "order by last_name,first_name ";
           
           String query = select + where + order;
           
-//           System.out.println("query: " + query);
-//           System.out.println("date: " + date);
+          System.out.println("whichone: " + whichOne);
+          System.out.println("query: " + query);
+          System.out.println("date: " + date);
           
           try
           {

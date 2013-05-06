@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.lang.ClassNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
@@ -343,6 +344,7 @@ public class MainWindow extends JFrame
                          "create table if not exists accounts ("+ 
                               "id integer primary key on conflict fail autoincrement, "+
                               "account_no integer not null, "+
+                              "sticker_no text," + 
                               "account_type text," +
                               "first_name text, "+
                               "last_name text," +
@@ -370,6 +372,28 @@ public class MainWindow extends JFrame
                     }
                     //commit changes first
      //				connection.commit();
+                    //add a column to the accounts table
+                    String q = "pragma table_info(accounts)";
+                    stmt = connection.createStatement();
+                    ResultSet rs = stmt.executeQuery(q);
+                    int found = 0;
+                    while(rs.next())
+                    {
+//                          System.out.println(rs.getString(2));
+                         if (rs.getString(2).equals("sticker_no"))
+                         {
+                              found = 1;
+                              break;
+                         }
+                    }
+                    if (found == 0)
+                    {
+                         //add that column to the table
+                         q = "alter table accounts add column sticker_no text";
+                         stmt = connection.createStatement();
+                         stmt.executeUpdate(q);
+                         System.out.println("found was false");
+                    }
                }
                else
                {

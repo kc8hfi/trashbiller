@@ -147,6 +147,7 @@ public class EditCustomer extends JDialog
 		
 		
 		JLabel acctNoLabel = new JLabel("Account No.");
+          JLabel stickerNoLabel = new JLabel("Sticker No.");
 		JLabel fnameLabel = new JLabel("First Name");
 		JLabel lnameLabel = new JLabel("Last Name");
 		JLabel addressLabel = new JLabel("Address");
@@ -158,6 +159,7 @@ public class EditCustomer extends JDialog
 		JLabel endLabel = new JLabel("End Date");
 		
 		JTextField acctNoField = new JTextField(Integer.toString(c.getAccountNo()));
+          JTextField stickerNoField = new JTextField(c.getStickerNo());
 // 		System.out.println("the account no is supposed to be: " + c.getAccountNo());
 		JTextField fnameField = new JTextField(c.getFirst());
 		JTextField lnameField = new JTextField(c.getLast());

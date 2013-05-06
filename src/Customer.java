@@ -36,6 +36,7 @@ public class Customer
 	{
 		id = 0;
 		accountNo = 0;
+          stickerNo = "";
 		accountType = "";
 		first = "";
 		last = "";
@@ -46,10 +47,11 @@ public class Customer
 		begin = "";
 		end = "";
 	}
-	public Customer(int i, int a, String t,String f,String l,String ad,String c,String s,String z,String b,String e)
+	public Customer(int i, int a, String sn,String t,String f,String l,String ad,String c,String s,String z,String b,String e)
 	{
 		id = i;
 		accountNo = a;
+          stickerNo = sn;
 		accountType = t;
 		first = f;
 		last = l;
@@ -64,7 +66,7 @@ public class Customer
 	public int size()
 	{
 		
-		return 11;
+		return 12;
 	}
 	
 	public Object at(int col)
@@ -78,31 +80,34 @@ public class Customer
 			case 1:
 				o = accountNo;
 				break;
-			case 2:
+               case 2:
+                    o = stickerNo;
+                    break;
+			case 3:
 				o = accountType;
 				break;
-			case 3:
+			case 4:
 				o = first;
 				break;
-			case 4:
+			case 5:
 				o = last;
 				break;
-			case 5:
+			case 6:
 				o = address;
 				break;
-			case 6:
+			case 7:
 				o = city;
 				break;
-			case 7:
+			case 8:
 				o = state;
 				break;
-			case 8:
+			case 9:
 				o = zip;
 				break;
-			case 9:
+			case 10:
 				o = begin;
 				break;
-			case 10:
+			case 11:
 				o = end;
 				break;
 		}
@@ -125,6 +130,15 @@ public class Customer
 	{
 		accountNo = i;
 	}
+     public String getStickerNo()
+     {
+          return stickerNo;
+     }
+     public void setStickerNo(String i)
+     {
+          stickerNo = i;
+     }
+	
 	public String getAccountType()
 	{
 		return accountType;
@@ -316,6 +330,7 @@ public class Customer
 	{
 		String t = "id: " + id + "\n" +
 			"account no: " + accountNo + "\n" +
+               "sticker no: " + stickerNo + "\n" +
 			"account type: " + accountType + "\n" +
 			"first: " + first + "\n" +
 			"last: " + last + "\n" +
@@ -407,6 +422,7 @@ public class Customer
 	
 	private int id;
 	private int accountNo;
+     private String stickerNo;
 	private String accountType;
 	private String first;
 	private String last;

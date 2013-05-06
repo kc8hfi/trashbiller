@@ -64,8 +64,8 @@ public class AddRecordAction implements ActionListener
 					customerType = b.getText();
 				}
 			}
-			String insertq = "insert into accounts (account_no,first_name,last_name,address1,"+
-				"city,state,zip,account_type,date_begin,date_end) values (?,?,?,?,?,?,?,?,?,?)";
+			String insertq = "insert into accounts (account_no,sticker_no,first_name,last_name,address1,"+
+				"city,state,zip,account_type,date_begin,date_end) values (?,?,?,?,?,?,?,?,?,?,?)";
 			System.out.println(insertq);
 			try
 			{
