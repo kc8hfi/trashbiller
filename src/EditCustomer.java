@@ -169,6 +169,7 @@ public class EditCustomer extends JDialog
 		JTextField zipField = new JTextField(c.getZip());
 		
 		textFields.add(acctNoField);
+		textFields.add(stickerNoField);
 		textFields.add(fnameField);
 		textFields.add(lnameField);
 		textFields.add(addressField);
@@ -348,6 +349,7 @@ public class EditCustomer extends JDialog
 		//the first horizontal group will contain a parallel group with the labels
 		hGroup.addGroup(layout.createParallelGroup().
 					addComponent(acctNoLabel)
+					.addComponent(stickerNoLabel)
 					.addComponent(fnameLabel)
 					.addComponent(lnameLabel)
 					.addComponent(addressLabel)
@@ -362,6 +364,7 @@ public class EditCustomer extends JDialog
 		//the next horizontal group contains a parallel group with the textfields
 		hGroup.addGroup(layout.createParallelGroup().
 					addComponent(acctNoField)
+                         .addComponent(stickerNoField)
 					.addComponent(fnameField)
 					.addComponent(lnameField)
 					.addComponent(addressField)
@@ -380,6 +383,11 @@ public class EditCustomer extends JDialog
 					.addComponent(acctNoField)
 					
 		);
+          vGroup.addGroup(layout.createParallelGroup(Alignment.BASELINE).
+                         addComponent(stickerNoLabel)
+                         .addComponent(stickerNoField)
+                         
+          );
 		//next vertical group
 		vGroup.addGroup(layout.createParallelGroup(Alignment.BASELINE).
 					addComponent(fnameLabel)

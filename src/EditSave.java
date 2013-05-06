@@ -60,6 +60,7 @@ public class EditSave implements ActionListener
 		}
 		String q = "update accounts set " +
 		"account_no = ?, " +
+          "sticker_no = ?, " +
 		"first_name = ?, " +
 		"last_name = ?, " + 
 		"address1 = ?, " +

@@ -49,6 +49,7 @@ public class SearchAction extends AbstractAction
 // 		System.out.println("the text from the cmd: " + ((JTextField)event.getSource()).getText());
 		String select = "select id, " +
 			"account_no as \"Acct. No\", " +
+			"sticker_no as \"Sticker\", " + 
 			"account_type as \"Type\", " +
 			"first_name as \"First\",last_name as \"Last\", "+
 			"address1 as \"Address\",city as \"City\", "+
@@ -127,15 +128,16 @@ public class SearchAction extends AbstractAction
 					Customer c = new Customer();
 					c.setId(rs.getInt(1));				//id
 					c.setAccountNo(rs.getInt(2));			//account number
-					c.setAccountType(rs.getString(3));		//account type
-					c.setFirst(rs.getString(4));			//first name
-					c.setLast(rs.getString(5));			//last name
-					c.setAddress(rs.getString(6));		//address
-					c.setCity(rs.getString(7));			//city
-					c.setState(rs.getString(8));			//state
-					c.setZip(rs.getString(9));			//zip
-					c.setBegin(rs.getString(10));			//begin date
-					c.setEnd(rs.getString(11));			//end date
+					c.setStickerNo(rs.getString(3));			//account number
+					c.setAccountType(rs.getString(4));		//account type
+					c.setFirst(rs.getString(5));			//first name
+					c.setLast(rs.getString(6));			//last name
+					c.setAddress(rs.getString(7));		//address
+					c.setCity(rs.getString(8));			//city
+					c.setState(rs.getString(9));			//state
+					c.setZip(rs.getString(10));			//zip
+					c.setBegin(rs.getString(11));			//begin date
+					c.setEnd(rs.getString(12));			//end date
 					
 					//add the new customer to the arraylist
 					data.add(c);

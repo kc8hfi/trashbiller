@@ -186,7 +186,8 @@ public class PayBill extends JPanel
 		
 // 		MyTablePayModel tableModel = new MyTablePayModel(this,c,d);
 		MyTablePayModel tableModel = new MyTablePayModel(this,c,d);
-		table = new JTable(tableModel);
+// 		table = new JTable(tableModel);
+          table = new MyTable(tableModel);
 		
 		trs = new TableRowSorter<MyTablePayModel>(tableModel);
 		
@@ -231,11 +232,16 @@ public class PayBill extends JPanel
 		statusText.setText(s);
 	}
 
-	public JTable getTable()
-	{
-		return table;
-	}
-	public TableRowSorter<MyTablePayModel> getSorter()
+// 	public JTable getTable()
+// 	{
+// 		return table;
+// 	}
+     public MyTable getTable()
+     {
+          return table;
+     }
+
+     public TableRowSorter<MyTablePayModel> getSorter()
 	{
 		return trs;
 	}
@@ -268,7 +274,8 @@ public class PayBill extends JPanel
 	}
 	
 	private MainWindow parent;
-	private JTable table;
+// 	private JTable table;
+     private MyTable table;
 	private TableRowSorter<MyTablePayModel> trs;
 	private JLabel statusText;
 	private JButton saveChanges;

@@ -22,6 +22,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JTable;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 import java.sql.SQLException; 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -49,7 +50,7 @@ public class StartPaymentAction extends AbstractAction
 		
 		String select = "select id, "+
 			"account_no ," + 
-			"first_name||' '||last_name||', '||address1||', '||city||', '||state||'  '||zip as name, "+
+			"last_name||' '||first_name||', '||address1||', '||city||', '||state||'  '||zip as name, "+
 			"account_type, "+
 			"amount, " + 
 			"payment_date " +
@@ -127,8 +128,14 @@ public class StartPaymentAction extends AbstractAction
 					data.add(c);
 	// 				System.out.println(c);
 				}
-				JTable tb = parent.getTable();
-				MyTablePayModel m = (MyTablePayModel)tb.getModel();
+// 				JTable tb = parent.getTable();
+                    MyTable tb = parent.getTable();
+                    
+                    //this might be a bad idea to hard code the row height
+                    tb.setRowHeight(25);
+                    
+
+                    MyTablePayModel m = (MyTablePayModel)tb.getModel();
 	// 			System.out.println("column names: " + colnames);
 				m.setTableInfo(colnames,data);
 				
