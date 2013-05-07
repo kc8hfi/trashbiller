@@ -223,6 +223,8 @@ public class ReportPaidAction extends JDialog implements ActionListener
 			Payments.setModel(tableModel);
 			
 			Payments.getColumnModel().getColumn(0).setPreferredWidth(200);
+               
+//                Payments.setRowHeight(25);
 // 			System.out.println("number of people: " + people.size());
 // 			ReportPaidModelRow tbModel = new ReportPaidModelRow("customer",people);
 // 			RowTable.setModel(tbModel);

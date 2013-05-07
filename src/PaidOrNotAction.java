@@ -135,9 +135,9 @@ class PaidOrNotAction implements ActionListener
           
           String query = select + where + order;
           
-          System.out.println("whichone: " + whichOne);
-          System.out.println("query: " + query);
-          System.out.println("date: " + date);
+//           System.out.println("whichone: " + whichOne);
+//           System.out.println("query: " + query);
+//           System.out.println("date: " + date);
           
           try
           {
@@ -172,6 +172,18 @@ class PaidOrNotAction implements ActionListener
                     //give the column headers and data to a new model
                     ReportsModel tableModel = new ReportsModel(colNames,everything);
                     parent.getTable().setModel(tableModel);
+                    
+                    //hard code the height for now
+                    parent.getTable().setRowHeight(25);
+                    
+                    //set the width of the columns
+                    parent.getTable().getColumnModel().getColumn(0).setPreferredWidth(10);    //account
+                    parent.getTable().getColumnModel().getColumn(1).setPreferredWidth(100);    //name
+                    parent.getTable().getColumnModel().getColumn(2).setPreferredWidth(200);    //address
+                    parent.getTable().getColumnModel().getColumn(3).setPreferredWidth(10);    //type
+
+                    if(whichOne.equals("paid"))                         
+                         parent.getTable().getColumnModel().getColumn(4).setPreferredWidth(10);    //amount
                     
                     //enable the button only if there is data
 //                     System.out.println("size: " + everything.size());

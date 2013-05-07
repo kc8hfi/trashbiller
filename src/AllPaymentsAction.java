@@ -183,6 +183,8 @@ class AllPaymentsAction implements ActionListener
                     parent.getTable().getColumnModel().getColumn(0).setPreferredWidth(200);
                     //enable the export button
                     parent.enableExport(true);
+                    
+                    parent.getTable().setRowHeight(25);
                }
                else
                {

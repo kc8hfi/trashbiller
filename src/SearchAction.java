@@ -143,6 +143,7 @@ public class SearchAction extends AbstractAction
 					data.add(c);
 				}
 				JTable tb = parent.getTable();
+                    tb.setRowHeight(25);
 				MyTableModel m = (MyTableModel)tb.getModel();
 	// 			m.setTableInfo(colnames,data);
 				

@@ -300,6 +300,7 @@ public class EditCustomer extends JDialog
 		
           CustomerHistoryModel history = new CustomerHistoryModel();
           table = new JTable(history);
+          table.setRowHeight(25);
           
           ArrayList<String> t = new ArrayList<String>(0);
           t.add("Year");
