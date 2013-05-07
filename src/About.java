@@ -142,6 +142,6 @@ public class About extends JDialog
 
      private MainWindow parent;
      private String author = "Charles Amey";
-     private String version = "0.2";
+     private String version = "0.3";
 
 }
